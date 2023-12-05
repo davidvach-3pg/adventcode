@@ -7,11 +7,13 @@ import java.util.Set;
 
 public class Card {
 
-    private final int cardNumber;
+    private int cardNumber;
 
-    private final List<Integer> winningNumbers = new ArrayList<>();
+    private List<Integer> winningNumbers = new ArrayList<>();
 
-    private final Set<Integer> matchNumbers = new HashSet<>();
+    private List<Integer> myNumbers = new ArrayList<>();
+
+    private Set<Integer> matchNumbers = new HashSet<>();
 
 
     public Set<Integer> getMatchNumbers() {
@@ -23,6 +25,7 @@ public class Card {
     }
 
     public void addMyNumber(Integer number) {
+        myNumbers.add(number);
         if (winningNumbers.contains(number)) {
             matchNumbers.add(number);
         }

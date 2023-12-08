@@ -1,8 +1,8 @@
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 public class RunnerDay8 {
 
@@ -16,7 +16,8 @@ public class RunnerDay8 {
 
 
         Node currentNode = playMap.getStartNode();
-        long countA = 0, countB  = 0;
+        long countA = 0;
+        long countB = 0;
         while (!currentNode.equals(playMap.getEndNode())) {
             for (Path path : playMap.getPathList()) {
                 countA++;
@@ -29,42 +30,48 @@ public class RunnerDay8 {
 
         // solution B
         List<Node> startingNodes = new ArrayList<>();
-        List<Node> newNodes = new ArrayList<>();
-        int[] hopsToz = new int[startingNodes.size()];
-        for (Node node: playMap.getNodeCache().values()) {
+        List<Node> endNodes = new ArrayList<>();
+
+
+        for (Node node : playMap.getNodeCache().values()) {
             if (node.getName().endsWith("A")) {
                 startingNodes.add(node);
+            } else if (node.getName().endsWith("Z")) {
+                endNodes.add(node);
             }
         }
-        int z = 0;
 
-        boolean areAllNodesOnEnd = false;
-
-        while (!areAllNodesOnEnd) {
+        Node node;
+        long[] countsToEnd = new long[startingNodes.size()];
+        while (!LongStream.of(countsToEnd).allMatch(i -> i > 0)) {
             for (Path path : playMap.getPathList()) {
                 countB++;
-                for (Node node : startingNodes) {
-                    newNodes.add(node.walk(path));
-                }
-
-                areAllNodesOnEnd = true;
-                for (Node node : newNodes) {
-                    if (!node.getName().endsWith("Z")) {
-                        areAllNodesOnEnd = false;
-                    } else {
-                        z++;
+                for (int position = 0; position < startingNodes.size(); position++) {
+                    node = startingNodes.get(position).walk(path);
+                    if (endNodes.contains(node)) {
+                        countsToEnd[position] = countB;
                     }
+                        startingNodes.set(position, node);
                 }
+            }
+        }
 
-                z=0;
-                startingNodes.clear();
-                startingNodes.addAll(newNodes);
-                newNodes.clear();
+        boolean toContinue = true;
+        int t = 0;
+        long[] countsToEndCopy =  countsToEnd.clone();
+        while (toContinue) {
+            t++;
+            toContinue = false;
+            countB =  Arrays.stream(countsToEnd).max().getAsLong();
+            for (int position = 0; position < countsToEnd.length; position++) {
+                if (countB % countsToEndCopy[position] != 0) {
+                    toContinue = true;
+                    countsToEnd[position] += countsToEndCopy[position];
+                    break;
+                }
             }
 
         }
-
-// 10 921 547 990 923
         Duration duration = Duration.between(start, LocalDateTime.now());
         System.out.println("countA:  " + countA + "  duration: " + duration.toSeconds());
         System.out.println("countB:  " + countB + "  duration: " + duration.toSeconds());

@@ -4,7 +4,7 @@ import java.util.stream.IntStream;
 
 public class Day8 {
     public static void main(String[] args) throws FileNotFoundException {
-        Scanner file = new Scanner(RunnerDay8.class.getResourceAsStream("/day8.txt"));
+        Scanner file = new Scanner(RunnerDay8.class.getResourceAsStream("/filip.txt"));
         int steps = 0, allSteps = 0;
         char[] lr = file.nextLine().toCharArray();
         Map<String, List<String>> nodes = new HashMap<>();

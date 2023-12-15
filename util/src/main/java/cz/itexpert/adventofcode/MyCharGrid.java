@@ -1,3 +1,5 @@
+package cz.itexpert.adventofcode;
+
 public class MyCharGrid {
     public char[][] grid;
 

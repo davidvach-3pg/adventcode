@@ -9,6 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
+        <module>util</module>
         <module>day1</module>
         <module>day2</module>
         <module>day3</module>
@@ -19,6 +20,10 @@
         <module>day8</module>
         <module>day9</module>
         <module>day10</module>
+        <module>day12</module>
+        <module>day13</module>
+        <module>day14</module>
+        <module>day15</module>
     </modules>
 
     <properties>

@@ -1,3 +1,7 @@
+import cz.itexpert.adventofcode.Direction;
+import cz.itexpert.adventofcode.Loc;
+import cz.itexpert.adventofcode.MyInfiniteGrid;
+
 import java.io.File;
 import java.nio.file.Files;
 import java.time.Duration;
@@ -22,12 +26,12 @@ public class RunnerDay10 {
 
     public static Stream<Direction> connections(char c) {
         return switch (c) {
-            case 'F' -> Stream.of(Direction.VYCHOD, Direction.JIH);
-            case '7' -> Stream.of(Direction.JIH, Direction.ZAPAD);
-            case 'L' -> Stream.of(Direction.SEVER, Direction.VYCHOD);
-            case 'J' -> Stream.of(Direction.SEVER, Direction.ZAPAD);
-            case '-' -> Stream.of(Direction.VYCHOD, Direction.ZAPAD);
-            case '|' -> Stream.of(Direction.SEVER, Direction.JIH);
+            case 'F' -> Stream.of(Direction.EAST, Direction.SOUTH);
+            case '7' -> Stream.of(Direction.SOUTH, Direction.WEST);
+            case 'L' -> Stream.of(Direction.NORTH, Direction.EAST);
+            case 'J' -> Stream.of(Direction.NORTH, Direction.WEST);
+            case '-' -> Stream.of(Direction.EAST, Direction.WEST);
+            case '|' -> Stream.of(Direction.NORTH, Direction.SOUTH);
             default -> Stream.empty();
         };
     }

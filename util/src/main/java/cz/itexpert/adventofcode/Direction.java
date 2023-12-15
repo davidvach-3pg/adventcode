@@ -1,3 +1,5 @@
+package cz.itexpert.adventofcode;
+
 import java.util.Arrays;
 import java.util.stream.Stream;
 
@@ -5,7 +7,7 @@ import static java.lang.Math.abs;
 
 public enum Direction {
 
-    SEVER(1, 'U'), VYCHOD(4, 'R'), JIH(2, 'D'), ZAPAD(3, 'L'), CENTER(8, 'C');
+    NORTH(1, 'U'), EAST(4, 'R'), SOUTH(2, 'D'), WEST(3, 'L'), CENTER(8, 'C');
 
     public final int num;
     public final int code;
@@ -20,7 +22,7 @@ public enum Direction {
     }
 
     public static Direction[] fourDirections() {
-        return new Direction[]{SEVER, VYCHOD, JIH, ZAPAD};
+        return new Direction[]{NORTH, EAST, SOUTH, WEST};
     }
 
     public Loc   move(Loc currentLocation) {
@@ -29,10 +31,10 @@ public enum Direction {
 
     public Loc move(Loc currentLocation, long amount) {
         return switch (this) {
-            case JIH -> new Loc(currentLocation.x, currentLocation.y + amount);
-            case SEVER -> new Loc(currentLocation.x, currentLocation.y - amount);
-            case VYCHOD -> new Loc(currentLocation.x + amount, currentLocation.y);
-            case ZAPAD -> new Loc(currentLocation.x - amount, currentLocation.y);
+            case SOUTH -> new Loc(currentLocation.x, currentLocation.y + amount);
+            case NORTH -> new Loc(currentLocation.x, currentLocation.y - amount);
+            case EAST -> new Loc(currentLocation.x + amount, currentLocation.y);
+            case WEST -> new Loc(currentLocation.x - amount, currentLocation.y);
             case CENTER -> new Loc(currentLocation.x, currentLocation.y);
         };
     }

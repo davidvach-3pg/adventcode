@@ -1,3 +1,5 @@
+package cz.itexpert.adventofcode;
+
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -14,8 +16,20 @@ public class MyInfiniteGrid {
         this.grid = g.grid;
     }
 
+
+
     public MyInfiniteGrid(Collection<Loc> locs, char c) {
         locs.forEach(l -> grid.put(l, c));
+    }
+
+    public MyInfiniteGrid(char[][] g, char transparent) {
+        for (int i = 0; i < g.length; i++) {
+            for (int j = 0; j < g[i].length; j++) {
+                if (transparent != g[i][j]) {
+                    grid.put(new Loc(j, i), g[i][j]);
+                }
+            }
+        }
     }
 
     public MyInfiniteGrid(String fileAsString) {
@@ -34,6 +48,10 @@ public class MyInfiniteGrid {
                 grid.put(new Loc(j, i), c);
             }
         }
+    }
+
+    public MyInfiniteGrid(char[][] grid) {
+            this(grid, ' ');
     }
 
     public Stream<Loc> findAll(Character c) {
@@ -146,6 +164,14 @@ public class MyInfiniteGrid {
 
     public char getChar(Loc p) {
         return get(p).orElse((char) 0);
+    }
+
+    public Map<Long, List<Loc>> columns() {
+        return stream().collect(Collectors.groupingBy(Loc::getX));
+    }
+
+    public Map<Long, List<Loc>> rows() {
+        return stream().collect(Collectors.groupingBy(Loc::getY));
     }
 
 

@@ -157,8 +157,6 @@ public class MyInfiniteGrid {
             toCheck = newToCheck;
         }
 
-        System.out.println("floodFill");
-        System.out.println(new MyInfiniteGrid(output, '*'));
         return output;
     }
 

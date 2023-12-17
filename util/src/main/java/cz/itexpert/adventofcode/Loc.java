@@ -71,6 +71,11 @@ public class Loc implements Comparable<Loc> {
     return Comparator.comparingLong(tlf).compare(this, o);
   }
 
-
-
+  @Override
+  public String toString() {
+    return "Loc{" +
+            "x=" + x +
+            ", y=" + y +
+            '}';
+  }
 }

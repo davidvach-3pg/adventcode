@@ -1,4 +1,7 @@
-package cz.itexpert.adventofcode;
+package cz.itexpert.adventofcode.grid;
+
+import cz.itexpert.adventofcode.Direction;
+import cz.itexpert.adventofcode.Loc;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -8,21 +11,21 @@ import java.util.stream.Stream;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 
-public class MyInfiniteGrid {
+public class CharacterGrid {
 
     public Map<Loc, Character> grid = new HashMap<>();
 
-    public MyInfiniteGrid(MyInfiniteGrid g) {
+    public CharacterGrid(CharacterGrid g) {
         this.grid = g.grid;
     }
 
 
 
-    public MyInfiniteGrid(Collection<Loc> locs, char c) {
+    public CharacterGrid(Collection<Loc> locs, char c) {
         locs.forEach(l -> grid.put(l, c));
     }
 
-    public MyInfiniteGrid(char[][] g, char transparent) {
+    public CharacterGrid(char[][] g, char transparent) {
         for (int i = 0; i < g.length; i++) {
             for (int j = 0; j < g[i].length; j++) {
                 if (transparent != g[i][j]) {
@@ -32,7 +35,7 @@ public class MyInfiniteGrid {
         }
     }
 
-    public MyInfiniteGrid(String fileAsString) {
+    public CharacterGrid(String fileAsString) {
         char[][] gridAsChar = Arrays.stream(fileAsString.split("\n")).map(String::toCharArray).toArray(char[][]::new);
 
         for (int i = 0; i < gridAsChar.length; i++) {
@@ -42,7 +45,7 @@ public class MyInfiniteGrid {
         }
     }
 
-    public MyInfiniteGrid(char c, long width, long height) {
+    public CharacterGrid(char c, long width, long height) {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 grid.put(new Loc(j, i), c);
@@ -50,7 +53,7 @@ public class MyInfiniteGrid {
         }
     }
 
-    public MyInfiniteGrid(char[][] grid) {
+    public CharacterGrid(char[][] grid) {
             this(grid, ' ');
     }
 
@@ -86,10 +89,10 @@ public class MyInfiniteGrid {
         return toCharGrid().toString();
     }
 
-    private MyCharGrid toCharGrid() {
+    private CharGrid toCharGrid() {
         long minX = minX();
         long minY = minY();
-        MyCharGrid g = new MyCharGrid(' ', new Loc(width(), height()));
+        CharGrid g = new CharGrid(' ', new Loc(width(), height()));
         grid.forEach((p, i) -> g.set(new Loc(p.x - minX, p.y - minY), i));
         return g;
     }
@@ -121,8 +124,8 @@ public class MyInfiniteGrid {
     public void set(Loc p, char c) {
         grid.put(p, c);
     }
-    public MyInfiniteGrid withBorder(long thickness, char borderChar) {
-        MyInfiniteGrid g = new MyInfiniteGrid(this);
+    public CharacterGrid withBorder(long thickness, char borderChar) {
+        CharacterGrid g = new CharacterGrid(this);
         long minX = minX();
         long minY = minY();
         long maxX = maxX();

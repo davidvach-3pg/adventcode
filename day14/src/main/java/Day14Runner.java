@@ -1,6 +1,6 @@
 import cz.itexpert.adventofcode.Direction;
 import cz.itexpert.adventofcode.Loc;
-import cz.itexpert.adventofcode.MyInfiniteGrid;
+import cz.itexpert.adventofcode.grid.CharacterGrid;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -50,23 +50,23 @@ public class Day14Runner {
         }
     }
     public long part1() {
-        var grid = new MyInfiniteGrid(dayGrid("\n"));
+        var grid = new CharacterGrid(dayGrid("\n"));
         turn(grid, Direction.NORTH);
         return calculateSum(grid);
     }
 
 
     public long part2() {
-        var grid = new MyInfiniteGrid(dayGrid("\n"));
+        var grid = new CharacterGrid(dayGrid("\n"));
         return solve(Stream.iterate(grid, this::doTurn), Day14Runner::calculateSum, 1000000000L);
     }
 
-    private MyInfiniteGrid doTurn(MyInfiniteGrid grid) {
+    private CharacterGrid doTurn(CharacterGrid grid) {
         Stream.of(NORTH, WEST, SOUTH, EAST).forEach(d -> turn(grid, d));
         return grid;
     }
 
-    private void turn(MyInfiniteGrid grid, Direction dir) {
+    private void turn(CharacterGrid grid, Direction dir) {
         grid.findAll('O').sorted(dir == Direction.EAST || dir == Direction.SOUTH ? reverseOrder() : naturalOrder()).forEach(r -> {
             Loc loc = r;
             while (grid.get(dir.move(loc)).map(c -> c == '.').orElse(false)) {
@@ -76,7 +76,7 @@ public class Day14Runner {
             grid.set(loc, 'O');
         });
     }
-    private static long calculateSum(MyInfiniteGrid grid) {
+    private static long calculateSum(CharacterGrid grid) {
         return grid.findAll('O').mapToLong(l -> abs(l.y - grid.maxY()) + 1).sum();
     }
 

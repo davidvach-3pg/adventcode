@@ -1,9 +1,11 @@
-package cz.itexpert.adventofcode;
+package cz.itexpert.adventofcode.grid;
 
-public class MyCharGrid {
+import cz.itexpert.adventofcode.Loc;
+
+public class CharGrid {
     public char[][] grid;
 
-    public MyCharGrid(char c, Loc size) {
+    public CharGrid(char c, Loc size) {
         this.grid = new char[size.intY()][size.intX()];
         for (int y = 0; y < size.y; y++) {
             for (int x = 0; x < size.x; x++) {

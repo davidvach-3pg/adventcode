@@ -1,7 +1,6 @@
 import cz.itexpert.adventofcode.Direction;
-import cz.itexpert.adventofcode.ListMap;
 import cz.itexpert.adventofcode.Loc;
-import cz.itexpert.adventofcode.MyInfiniteGrid;
+import cz.itexpert.adventofcode.grid.CharacterGrid;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -12,7 +11,6 @@ import java.util.stream.Stream;
 
 import static java.lang.Integer.getInteger;
 import static java.lang.Integer.parseInt;
-import static java.util.stream.IntStream.range;
 
 public class Day16Runner {
     private String fileName;
@@ -50,10 +48,10 @@ public class Day16Runner {
 
 
     public long part1() {
-        return getVisitedItemInGrid(new MyInfiniteGrid(getResourceAsString()), new Loc(0, 0), Direction.EAST);
+        return getVisitedItemInGrid(new CharacterGrid(getResourceAsString()), new Loc(0, 0), Direction.EAST);
     }
 
-    public long getVisitedItemInGrid(MyInfiniteGrid grid, Loc start, Direction direction) {
+    public long getVisitedItemInGrid(CharacterGrid grid, Loc start, Direction direction) {
         Set<VisitedPath> cache = new HashSet<>();
         move(grid, start, direction, cache);
 //        printVisited(grid, cache);
@@ -65,14 +63,14 @@ public class Day16Runner {
         return result;
     }
 
-    private static void printVisited(MyInfiniteGrid grid, Set<VisitedPath> cache) {
-        MyInfiniteGrid gridVisited = new MyInfiniteGrid('-', grid.width(), grid.height());
+    private static void printVisited(CharacterGrid grid, Set<VisitedPath> cache) {
+        CharacterGrid gridVisited = new CharacterGrid('-', grid.width(), grid.height());
         cache.stream().forEach(visitedPath -> gridVisited.set(visitedPath.loc, '#'));
         System.out.println(gridVisited);
     }
 
 
-    public void move(MyInfiniteGrid grid, Loc start, Direction direction, Set<VisitedPath> cache) {
+    public void move(CharacterGrid grid, Loc start, Direction direction, Set<VisitedPath> cache) {
         int vpravo = 90, vlevo = -90;
 //        printVisited(grid, cache);
         if (cache.contains(new VisitedPath(start, direction))) {
@@ -127,7 +125,7 @@ public class Day16Runner {
 
 
     public long part2() {
-        MyInfiniteGrid grid = new MyInfiniteGrid(getResourceAsString());
+        CharacterGrid grid = new CharacterGrid(getResourceAsString());
 
         Set<VisitedPath> toVist = new HashSet<>();
         for (int x = 0; x < grid.width(); x++) {

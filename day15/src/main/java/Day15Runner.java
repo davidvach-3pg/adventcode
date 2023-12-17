@@ -1,7 +1,4 @@
-import cz.itexpert.adventofcode.Direction;
 import cz.itexpert.adventofcode.ListMap;
-import cz.itexpert.adventofcode.Loc;
-import cz.itexpert.adventofcode.MyInfiniteGrid;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -11,13 +8,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static cz.itexpert.adventofcode.Direction.*;
-import static cz.itexpert.adventofcode.Direction.EAST;
 import static cz.itexpert.adventofcode.Solver.solve;
 import static java.lang.Integer.parseInt;
 import static java.lang.Math.abs;
-import static java.util.Comparator.naturalOrder;
-import static java.util.Comparator.reverseOrder;
 import static java.util.stream.IntStream.range;
 
 public class Day15Runner {

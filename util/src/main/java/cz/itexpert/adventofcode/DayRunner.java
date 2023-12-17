@@ -18,7 +18,7 @@ public abstract class DayRunner {
     private Object solutionPart2;
 
     public DayRunner(int day, String filePostfix) {
-        this.fileName = String.format("day%s%s/src/main/resources/day.txt", day, filePostfix);
+        this.fileName = String.format("day%s/src/main/resources/day%s.txt", day, filePostfix);
     }
 
     public DayRunner(int day) {

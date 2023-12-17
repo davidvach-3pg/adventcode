@@ -1,6 +1,6 @@
 import cz.itexpert.adventofcode.Direction;
 import cz.itexpert.adventofcode.Loc;
-import cz.itexpert.adventofcode.MyInfiniteGrid;
+import cz.itexpert.adventofcode.grid.CharacterGrid;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -37,7 +37,7 @@ public class RunnerDay10 {
     }
 
     private long part1() {
-        MyInfiniteGrid grid = new MyInfiniteGrid(getResourceAsString());
+        CharacterGrid grid = new CharacterGrid(getResourceAsString());
         Loc start = grid.findAll('S').findAny().get();
 
         Direction comeFrom = Direction.four()
@@ -66,8 +66,8 @@ public class RunnerDay10 {
 
 
     public long part2()  {
-        var grid = new MyInfiniteGrid(getResourceAsString());
-        var visitedBiggerGrid = new MyInfiniteGrid(' ', grid.width() * 2, grid.height() * 2);
+        var grid = new CharacterGrid(getResourceAsString());
+        var visitedBiggerGrid = new CharacterGrid(' ', grid.width() * 2, grid.height() * 2);
         Loc start = grid.findAll('S').findAny().get();
         Direction comeFrom = Direction.four()
                 .filter(d -> grid.contains(d.move(start)))
@@ -81,7 +81,7 @@ public class RunnerDay10 {
             currentLoc = moveLoc(currentLoc, comeFrom, visitedBiggerGrid);
         }
 
-        var pathGrid = new MyInfiniteGrid('.', grid.width(), grid.height()); // grid s teckama
+        var pathGrid = new CharacterGrid('.', grid.width(), grid.height()); // grid s teckama
         visitedBiggerGrid.findAll('X').forEach(l -> pathGrid.set(l.translate(l2 -> l2 / 2), 'X')); // kriz, kde je cesta
 //        System.out.println(visitedBiggerGrid);
 
@@ -105,7 +105,7 @@ public class RunnerDay10 {
 
     }
 
-    private static Loc moveLoc(Loc currentLoc, Direction comeFrom, MyInfiniteGrid visited) {
+    private static Loc moveLoc(Loc currentLoc, Direction comeFrom, CharacterGrid visited) {
         currentLoc = comeFrom.move(currentLoc);
         Loc zoomed = currentLoc.translate(l -> l * 2);
         visited.set(zoomed, 'X');

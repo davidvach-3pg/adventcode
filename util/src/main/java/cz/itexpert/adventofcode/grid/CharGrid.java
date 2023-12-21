@@ -2,8 +2,14 @@ package cz.itexpert.adventofcode.grid;
 
 import cz.itexpert.adventofcode.Loc;
 
+import java.util.Arrays;
+
 public class CharGrid {
     public char[][] grid;
+
+    public CharGrid(String resourceAsText) {
+        this.grid = Arrays.stream(resourceAsText.split("\n")).sequential().map(String::toCharArray).toArray(char[][]::new);
+    }
 
     public CharGrid(char c, Loc size) {
         this.grid = new char[size.intY()][size.intX()];

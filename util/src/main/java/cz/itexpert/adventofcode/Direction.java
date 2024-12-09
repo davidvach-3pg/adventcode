@@ -17,7 +17,7 @@ public enum Direction {
         this.code = code;
     }
 
-    public static Stream<Direction>  four() {
+    public static Stream<Direction> four() {
         return Arrays.stream(fourDirections());
     }
 
@@ -25,7 +25,11 @@ public enum Direction {
         return new Direction[]{NORTH, EAST, SOUTH, WEST};
     }
 
-    public Loc   move(Loc currentLocation) {
+    public static Direction getByDirCode(char code) {
+        return Arrays.stream(values()).filter(e -> e.code == code).findAny().get();
+    }
+
+    public Loc move(Loc currentLocation) {
         return move(currentLocation, 1);
     }
 

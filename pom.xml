@@ -10,30 +10,30 @@
     <packaging>pom</packaging>
     <modules>
         <module>util</module>
-        <module>day1</module>
-        <module>day2</module>
-        <module>day3</module>
-        <module>day4</module>
-        <module>day5</module>
-        <module>day6</module>
-        <module>day7</module>
-        <module>day8</module>
-        <module>day9</module>
-        <module>day10</module>
-        <module>day12</module>
-        <module>day13</module>
-        <module>day14</module>
-        <module>day15</module>
-        <module>day16</module>
-        <module>day17</module>
-        <module>day18</module>
-        <module>day19</module>
-        <module>day20</module>
-        <module>day21</module>
-        <module>day22</module>
-        <module>day23</module>
-        <module>day24</module>
-        <module>day25</module>
+        <module>2023day1</module>
+        <module>2023day2</module>
+        <module>2023day3</module>
+        <module>2023day4</module>
+        <module>2023day5</module>
+        <module>2023day6</module>
+        <module>2023day7</module>
+        <module>2023day8</module>
+        <module>2023day9</module>
+        <module>2023day10</module>
+        <module>2023day12</module>
+        <module>2023day13</module>
+        <module>2023day14</module>
+        <module>2023day15</module>
+        <module>2023day16</module>
+        <module>2023day17</module>
+        <module>2023day18</module>
+        <module>2023day19</module>
+        <module>2023day20</module>
+        <module>2023day21</module>
+        <module>2023day22</module>
+        <module>2023day23</module>
+        <module>2023day24</module>
+        <module>2023day25</module>
     </modules>
 
     <properties>

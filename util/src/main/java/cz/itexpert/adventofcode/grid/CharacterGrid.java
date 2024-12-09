@@ -15,10 +15,12 @@ public class CharacterGrid {
 
     public Map<Loc, Character> grid = new HashMap<>();
 
+    public CharacterGrid() {
+    }
+
     public CharacterGrid(CharacterGrid g) {
         this.grid = g.grid;
     }
-
 
 
     public CharacterGrid(Collection<Loc> locs, char c) {
@@ -54,7 +56,7 @@ public class CharacterGrid {
     }
 
     public CharacterGrid(char[][] grid) {
-            this(grid, ' ');
+        this(grid, ' ');
     }
 
     public Stream<Loc> findAll(Character c) {
@@ -124,6 +126,7 @@ public class CharacterGrid {
     public void set(Loc p, char c) {
         grid.put(p, c);
     }
+
     public CharacterGrid withBorder(long thickness, char borderChar) {
         CharacterGrid g = new CharacterGrid(this);
         long minX = minX();
@@ -148,18 +151,19 @@ public class CharacterGrid {
     public Set<Loc> floodFill(Loc start, Predicate<Character> predicate) {
         Set<Loc> output = new HashSet<>();
         Set<Loc> toCheck = new HashSet<>();
+        long minX = minX(), minY = minY(), maxX = maxX(), maxY = maxY();
+        Predicate<Loc> inBounds = l -> l.x >= minX && l.x <= maxX && l.y >= minY && l.y <= maxY;
         toCheck.add(start);
         while (!toCheck.isEmpty()) {
             Set<Loc> newToCheck = new HashSet<>();
             for (Loc l : toCheck) {
                 if (predicate.test(getChar(l))) {
                     output.add(l);
-                    newToCheck.addAll(Direction.four().map(d -> d.move(l)).filter(this::contains).filter(l2 -> !output.contains(l2)).collect(Collectors.toSet()));
+                    newToCheck.addAll(Direction.four().map(d -> d.move(l)).filter(inBounds).filter(l2 -> !output.contains(l2)).collect(Collectors.toSet()));
                 }
             }
             toCheck = newToCheck;
         }
-
         return output;
     }
 
@@ -176,4 +180,9 @@ public class CharacterGrid {
     }
 
 
+    public void draw(Loc start, Loc end, char c) {
+        for (Loc l : start.line(end)) {
+            set(l, c);
+        }
+    }
 }

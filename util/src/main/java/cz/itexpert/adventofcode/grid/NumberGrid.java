@@ -1,5 +1,6 @@
 package cz.itexpert.adventofcode.grid;
 
+import java.awt.*;
 import java.util.Arrays;
 
 public class NumberGrid {
@@ -38,6 +39,12 @@ public class NumberGrid {
 
     public int width() {
         return grid[0].length;
+    }
+
+    public long get(Point p) {
+        //if (p.x >= 0 && p.x < grid.length && p.y >= 0 && p.y < grid[0].length) {
+            return grid[p.x][p.y];
+        //}
     }
 
 }

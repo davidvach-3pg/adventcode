@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Optional;
 import java.util.stream.Stream;
 
 public abstract class DayRunner {
@@ -18,18 +17,26 @@ public abstract class DayRunner {
     private Object solutionPart2;
 
     public DayRunner(int day, String filePostfix) {
-        this.fileName = String.format("day%s/src/main/resources/day%s.txt", day, filePostfix);
+        this.fileName = String.format("%s/day%s.txt", getFIleFolder(day), filePostfix);
+    }
+
+    public String getFIleFolder(int day) {
+        return String.format("day%s/src/main/resources", day);
     }
 
     public DayRunner(int day) {
       this(day, "");
     }
 
-    protected Stream<String> dayStream(String delimiter) {
-        return Arrays.stream(getResourceAsString().split(delimiter));
+    protected Stream<String> dayStream() {
+        return dayStream("\n");
     }
 
-    public String getResourceAsString() {
+    protected Stream<String> dayStream(String delimiter) {
+        return Arrays.stream(getFileAsString().split(delimiter));
+    }
+
+    public String getFileAsString() {
         try {
             return Files.readString(new File(fileName).toPath());
         } catch (Exception e) {
